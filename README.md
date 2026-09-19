@@ -2,20 +2,20 @@
 
 Projet lecteur mp3 avec ESP32 
 
-## Matériel
-# Affichage 
+# Matériel
+### Affichage 
 - ESP32 C3 mini
 - Ecran OLED
 
-# Alimentation
+### Alimentation
 - Lipo Batterie
 - TP4056
 
-# Son
+### Son
 - DFPlayer + haut-parleur
 - Carte SD
 
-# Autres
+### Autres
 - connecteur Jack
 - PCB
 - Interrupteur à Bascule
