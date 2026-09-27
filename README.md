@@ -1,6 +1,6 @@
-## Lecteur MP3 avec ESP32 
+## Lecteur MP3 avec ESP32 mini C3
 
-Projet lecteur mp3 avec ESP32 
+Petit lecteur mp3 retro
 
 # Matériel
 ### Affichage 
@@ -14,11 +14,13 @@ Projet lecteur mp3 avec ESP32
 ### Son
 - DFPlayer + haut-parleur
 - Carte SD
+- Connecteur Jack Femelle 
 
 ### Autres
 - connecteur Jack
 - PCB
 - Interrupteur à Bascule
+- Bouton à molette
 
 
 
