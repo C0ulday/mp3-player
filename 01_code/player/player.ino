@@ -71,8 +71,6 @@ void setup() {
 }
 
 
-
-
 // -------- Loop --------
 void loop() {
   unsigned long now = millis();
@@ -94,10 +92,7 @@ void loop() {
   }
 
   u8g2.clearBuffer();
-  u8g2.setCursor(0, 12);
-  u8g2.printf("t=%lu s", millis() / 1000);
-  u8g2.setCursor(0, 26);
-  u8g2.printf("reset=%d", (int)esp_reset_reason());
+  splashScreen();
   u8g2.sendBuffer();
   delay(500);
 }
