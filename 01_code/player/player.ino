@@ -55,12 +55,15 @@ void setup() {
   }
   delay(1500);
   splashScreen();
-  showMusicBits();
-
 
 }
 
 void loop() {
+
+
+  showMenu();
+
+
 
   unsigned long now = millis();
 
@@ -79,6 +82,7 @@ void loop() {
     Serial.println("NEXT");
     player.play(3);
   }
+  delay(50);
 
 
 }
