@@ -1,0 +1,4 @@
+// First page
+void splashScreen(){
+
+}
