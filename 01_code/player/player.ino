@@ -4,6 +4,22 @@
 #include <Wire.h>
 #include <esp_system.h>
 
+// ==================== PROTOTYPES ====================
+void splashScreen();
+void showMusicBits();
+void showBLEBits();
+void showVolumeBits();
+void showRectSelectMenu(int x, int y);
+void showText(const char* fmt, ...);
+void leftArrow(void);
+void rightArrow(void);
+void showVolumeMenu();
+void showTrackMenu();
+void showBLEMenu();
+void showMenu();
+void updateSelection();
+void updateScreen();
+
 HardwareSerial MP3Serial(1);
 DFRobotDFPlayerMini player;
 
@@ -17,15 +33,10 @@ const int PLAY_PIN = 1;
 const int NEXT_PIN = 3;
 
 uint8_t volume = 20;
-uint8_t folders = 0;
 uint8_t tracks = 0;
 
 bool inMenu =  true;
-bool isPlaying = false;
-bool inBLE = false;
-bool inVolume = false;
-bool updateScreen = false;
-
+bool update = false;
 int selection = 2;
 
 unsigned long lastPress = 0;
@@ -60,7 +71,6 @@ void setup() {
 
   if (ok) {
     player.volume(volume);
-    folders = player.readFolderCounts();
     showText("DFPlayer OK");
   } else {
     showText("DFPlayer ERREUR");
@@ -73,24 +83,8 @@ void setup() {
 void loop() {
 
   showMenu();
+  updateSelection();
 
-  unsigned long now = millis();
-
-  if (digitalRead(PLAY_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
-    lastPress = now;
-    Serial.println("PLAY");
-    player.play(1);
-  }
-  if (digitalRead(PREV_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
-    lastPress = now;
-    Serial.println("PREV");
-    player.play(2);
-  }
-  if (digitalRead(NEXT_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
-    lastPress = now;
-    Serial.println("NEXT");
-    player.play(3);
-  }
   delay(50);
 
 
