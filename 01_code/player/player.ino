@@ -55,6 +55,7 @@ void setup() {
   }
   delay(1500);
   splashScreen();
+  showMusicBits();
 
 
 }
