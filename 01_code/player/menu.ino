@@ -5,13 +5,6 @@ void showRectSelectMenu(int x, int y);
 
 
 
-void showMessage(const char* l1) {
-  u8g2.clearBuffer();
-  u8g2.setFont(u8g2_font_6x10_tf);
-  u8g2.drawStr(0, 12, l1);
-  u8g2.sendBuffer();
-}
-
 void splashScreen() {
   u8g2.clearBuffer();
   u8g2.setFontMode(1);
@@ -35,6 +28,26 @@ void showMenu(){
   showRectSelectMenu(57,7);
 }
 
+void updateSelection(uint8_t selection){
+
+  if (digitalRead(PREV_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
+    lastPress = now;
+    if (selection > 0) {
+      selection--;
+    } else {
+      selection = 3;
+    }
+  }
+  if (digitalRead(NEXT_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
+    lastPress = now;
+     if (selection < 3 ) {
+      selection++;
+    } else {
+      selection = 1;
+    }
+  }
+  
+}
 void showMusicBits(){
   
   static const unsigned char image_music_bits[] U8X8_PROGMEM = {0x00,0x3e,0xf0,0x21,0x10,0x20,0x10,0x3e,0xf0,0x23,0x10,0x20,0x10,0x20,0x10,0x20,0x10,0x20,0x10,0x20,0x10,0x1c,0x0e,0x22,0x11,0x22,0x11,0x1c,0x0e,0x00,0x00,0x00};
@@ -42,11 +55,10 @@ void showMusicBits(){
   u8g2.setFontMode(1);
   u8g2.setBitmapMode(1);
   // music
-  u8g2.drawXBMP(57, 7, 14, 16, image_music_bits);
+  u8g2.drawXBMP(57, 8, 14, 16, image_music_bits);
   u8g2.sendBuffer();
 
 }
-
 
 void showBLEBits(){
   
@@ -78,5 +90,51 @@ void showRectSelectMenu(int x , int y){
     u8g2.drawBox(x-2, y-2, 20, 20);
     u8g2.sendBuffer();
 }
+
+      
+void showTrackMenu(uint8_t number){ 
+  showText("Track : %d", &number);
+  leftArrow();
+  rightArrow();
+
+}
+
+void showFolderMenu(uint8_t number){
+
+  showText("Folder : %d", &number);
+  leftArrow();
+  rightArrow();
+
+}
+
+void showText(const char* text){
+  u8g2.clearBuffer();
+  u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.drawStr(43, 20, text);
+  u8g2.sendBuffer();
+}
+
+
+void leftArrow(void) {
+
+    static const unsigned char image_ButtonLeft_bits[] U8X8_PROGMEM = {0x08,0x0c,0x0e,0x0f,0x0e,0x0c,0x08};
+    u8g2.clearBuffer();
+    u8g2.setFontMode(1);
+    u8g2.setBitmapMode(1);
+    // ButtonLeft
+    u8g2.drawXBMP(10, 13, 4, 7, image_ButtonLeft_bits);
+    u8g2.sendBuffer();
+}
+
+void rightArrow(void) {
+    static const unsigned char image_ButtonRight_bits[] U8X8_PROGMEM = {0x01,0x03,0x07,0x0f,0x07,0x03,0x01};
+    u8g2.clearBuffer();
+    u8g2.setFontMode(1);
+    u8g2.setBitmapMode(1);
+    // ButtonRight
+    u8g2.drawXBMP(114, 13, 4, 7, image_ButtonRight_bits);
+    u8g2.sendBuffer();
+}
+
 
 

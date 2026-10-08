@@ -17,6 +17,17 @@ const int PLAY_PIN = 1;
 const int NEXT_PIN = 3;
 
 uint8_t volume = 20;
+uint8_t folders = 0;
+uint8_t tracks = 0;
+
+bool inMenu =  true;
+bool isPlaying = false;
+bool inBLE = false;
+bool inVolume = false;
+bool updateScreen = false;
+
+int selection = 2;
+
 unsigned long lastPress = 0;
 const unsigned long DEBOUNCE_MS = 300;
 
@@ -35,7 +46,7 @@ void setup() {
 
   // OLED init
   u8g2.begin();
-  showMessage("Demarrage...");
+  showText("Demarrage...");
 
   // DFPLAYER init
   delay(1500);   // time for the dfplayer to start
@@ -49,9 +60,10 @@ void setup() {
 
   if (ok) {
     player.volume(volume);
-    showMessage("DFPlayer OK");
+    folders = player.readFolderCounts();
+    showText("DFPlayer OK");
   } else {
-    showMessage("DFPlayer ERREUR");
+    showText("DFPlayer ERREUR");
   }
   delay(1500);
   splashScreen();
@@ -60,10 +72,7 @@ void setup() {
 
 void loop() {
 
-
   showMenu();
-
-
 
   unsigned long now = millis();
 
