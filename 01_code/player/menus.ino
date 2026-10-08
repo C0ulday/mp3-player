@@ -1,25 +1,41 @@
-// ----- First page : the splashscreen 
-void splashScreen(){
-  drawNote();
+void showMessage(const char* l1) {
+  u8g2.clearBuffer();
+  u8g2.setFont(u8g2_font_6x10_tf);
+  u8g2.drawStr(0, 12, l1);
+  u8g2.sendBuffer();
 }
 
-// little music note
-void drawNote(int x, int y) {
-  u8g2_DrawDisc(&u8g2, x, y + 3, 1, U8G2_DRAW_ALL);
-  u8g2_DrawLine(&u8g2, x + 1, y + 3, x + 1, y);
-  u8g2_DrawLine(&u8g2, x + 1, y, x + 3, y + 1);
+void splashScreen() {
+  u8g2.clearBuffer();
+  u8g2.setFontMode(1);
+  u8g2.setBitmapMode(1);
+
+  u8g2.setFont(u8g2_font_5x8_tr);
+  u8g2.drawStr(48, 18, "MP3 POD");
+
+  // trois petits points
+  u8g2.drawDisc(60, 22, 1);
+  u8g2.drawDisc(64, 22, 1);
+  u8g2.drawDisc(68, 22, 1);
+
+  u8g2.sendBuffer();
 }
 
-// star
-void drawStar(int cx, int cy, int size) {
-
-  u8g2_DrawLine(&u8g2,cx, cy - size, cx, cy + size);
-  u8g2_DrawLine(&u8g2,cx - size, cy, cx + size, cy);
-
-  int diag = size / 2;
-
-  u8g2_DrawLine(&u8g2,cx - diag, cy - diag, cx + diag, cy + diag);
-  u8g2_DrawLine(&u8g2,cx - diag, cy + diag, cx + diag, cy - diag);
+void showMenu(){
+  showLeftArrow();
+  showRightArrow();
 }
 
+void showLeftArrow(){
+ 
+  u8g2.setFont(u8g2_font_6x10_tf);
+  u8g2.drawStr(34, 10, "<");
+  u8g2.sendBuffer();    
+}
 
+void showRightArrow(){
+  u8g2.clearBuffer();
+  u8g2.setFont(u8g2_font_6x10_tf);
+  u8g2.drawStr(24, 20, ">");
+  u8g2.sendBuffer();    
+}
