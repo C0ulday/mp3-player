@@ -1,4 +1,4 @@
-## Lecteur MP3 avec ESP32 mini C3
+## Lecteur MP3 avec ESP32
 
 english below
 
@@ -6,7 +6,7 @@ Petit lecteur mp3 avec port jack + bluethooth
 
 # Matériel
 ### Affichage 
-- ESP32 C3 mini
+- ESP32
 - Ecran OLED 0.91''
 
 ### Alimentation
@@ -34,7 +34,6 @@ U8g2lib
 ### Etape 2 : Faire marcher DFPlayer + haut-parleur + boutons
 ### Etape 3 : Faire marcher OLED
 
-Important : les GPIO 8 et GPIO 9 pour le I2C ne sont pas utilisés car ils sont déjà liés au bouton BOOT qui crée des problèmes d'afficchage.
 Sites pratiques : lopaka, pour le design de l'interface et la génération plus rapide de code avec u8g2
 
 ### Etape 4 : Faire marcher OLED + boutons
