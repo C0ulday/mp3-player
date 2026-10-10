@@ -23,20 +23,20 @@ void updateScreen();
 HardwareSerial MP3Serial(1);
 DFRobotDFPlayerMini player;
 
-const int SDA_PIN = 4;
-const int SCL_PIN = 5;
-const int RX_PIN = 21;   
-const int TX_PIN = 20;   
+const int SDA_PIN = 21;
+const int SCL_PIN = 22;
+const int RX_PIN = 16;   
+const int TX_PIN = 17;   
 
-const int PREV_PIN = 0;
-const int PLAY_PIN = 1;
-const int NEXT_PIN = 3;
+const int PREV_PIN = 25;
+const int PLAY_PIN = 26;
+const int NEXT_PIN = 27;
 
 uint8_t volume = 20;
 uint8_t tracks = 0;
 
 bool inMenu =  true;
-bool update = false;
+bool update = true;
 int selection = 2;
 
 unsigned long lastPress = 0;
@@ -57,7 +57,7 @@ void setup() {
 
   // OLED init
   u8g2.begin();
-  showText("Demarrage...");
+
 
   // DFPLAYER init
   delay(1500);   // time for the dfplayer to start
@@ -71,21 +71,20 @@ void setup() {
 
   if (ok) {
     player.volume(volume);
-    showText("DFPlayer OK");
-  } else {
-    showText("DFPlayer ERREUR");
-  }
-  delay(1500);
+  } 
+
+  delay(1000);
   splashScreen();
+  delay(3000);
+  showMenu();
+  Serial.flush(); 
 
 }
 
 void loop() {
 
-  showMenu();
-  updateSelection();
-
-  delay(50);
+ 
+  updateScreen();
 
 
 }

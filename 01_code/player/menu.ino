@@ -56,7 +56,7 @@ void showVolumeBits() {
 }
 
 // ==================== SELECTION / FLECHES ====================
-void showRectSelectMenu(int x, int y) {
+void drawRect(int x, int y) {
   u8g2.setDrawColor(2);
   u8g2.drawBox(x - 2, y - 2, 20, 20);
   u8g2.setDrawColor(1);
@@ -90,6 +90,7 @@ void showText(const char* fmt, ...) {
 
   u8g2.setFont(u8g2_font_6x10_tr);
   u8g2.drawStr(43, 20, buf);
+  u8g2.sendBuffer();
 }
 
 // ==================== MENUS ====================
@@ -117,47 +118,60 @@ void showMenu() {
   showMusicBits();
   showBLEBits();
   showVolumeBits();
-  showRectSelectMenu(57, 7);
   u8g2.sendBuffer();
+}
+
+void drawMenu() {
+  showMusicBits();
+  showBLEBits();
+  showVolumeBits();
 }
 
 // ==================== INPUT ====================
 void updateSelection() {
   unsigned long now = millis();
-  if (digitalRead(PREV_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
+  if (now - lastPress < DEBOUNCE_MS) return;
+  if (digitalRead(PREV_PIN) == LOW) {
     lastPress = now;
-    if (selection > 0) {
-      selection--;
-    } else {
-      selection = 3;
-    }
+    Serial.println("press gauche\n");
     update = true;
   }
-  if (digitalRead(NEXT_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
+  else if (digitalRead(NEXT_PIN) == LOW) {
     lastPress = now;
-    if (selection < 3) {
-      selection++;
-    } else {
-      selection = 0;
-    }
+    Serial.println("press droite\n");
+    update = true;
+  }
+  else if (digitalRead(PLAY_PIN) == LOW) {
+    lastPress = now;
+    Serial.println("press centre\n");
     update = true;
   }
 }
 
+
+
 // ==================== AFFICHAGE ====================
+
 void updateScreen() {
-  if (update) {
+
+  updateSelection();
+  
+  if (!update) return;
+  update = false;
+  
     if (inMenu) {
       u8g2.clearBuffer();
+      drawMenu();
       if (selection == 1) {
-        showVolumeMenu();
+        drawRect(14,8);
       } else if (selection == 2) {
-        showTrackMenu();
-      } else {
-        showBLEMenu();
+        drawRect(57,8);
+       } else {
+        drawRect(100,8);
       }
       u8g2.sendBuffer();
+
     }
-    update = false;
-  }
+
+  
 }
