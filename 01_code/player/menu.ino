@@ -101,7 +101,7 @@ void drawVolumeMenu() {
     
     char buffer[3];
     sprintf(buffer,"%d",volume);
-    u8g2.setFont(u8g2_font_5x8_tr);
+    u8g2.setFont(u8g2_font_6x10_tr);
     u8g2.drawStr(60, 20, buffer);
     // SmallArrowUp
     u8g2.drawXBMP(62, 8, 5, 3, image_SmallArrowUp_bits);
@@ -153,20 +153,7 @@ void manageMenu(){
 
   drawMenu();       
   
-  switch (selection) {
-    case 0:
-      u8g2.setDrawColor(2);
-      u8g2.drawBox(14 - 2, 8 - 2, 20, 20);
-      break;
-    case 1:
-      u8g2.setDrawColor(2);
-      u8g2.drawBox(100 - 2, 8 - 2, 20, 20);
-      break;
-    case 3:
-      u8g2.setDrawColor(2);
-      u8g2.drawBox(57 - 2, 8 - 2, 20, 20);
-
-  }              
+            
 
   if (digitalRead(PREV_PIN) == LOW) {
     lastPress = now;
@@ -185,6 +172,22 @@ void manageMenu(){
     Serial.println("press centre");
     inMenu = false;
   }
+
+    switch (selection) {
+      case 0:
+        u8g2.setDrawColor(2);
+        u8g2.drawBox(14 - 2, 8 - 2, 20, 20);
+        break;
+      case 1:
+        u8g2.setDrawColor(2);
+        u8g2.drawBox(57 - 2, 8 - 2, 20, 20);
+        break;
+      case 2:
+        u8g2.setDrawColor(2);
+        u8g2.drawBox(100 - 2, 8 - 2, 20, 20);
+        break;
+
+    }  
 
   
 
@@ -205,14 +208,15 @@ void manageVolumeMenu(){
     lastPress = now;
     Serial.println("press gauche");
     u8g2.setDrawColor(2);
-    u8g2.drawBox(60, 7, 9, 5);
+    u8g2.drawBox(60, 22, 9, 5);
+    
     dir--;
   }
   else if (digitalRead(NEXT_PIN) == LOW) {
     lastPress = now;
     Serial.println("press droite");
     u8g2.setDrawColor(2);
-    u8g2.drawBox(60, 22, 9, 5);
+    u8g2.drawBox(60, 7, 9, 5);
     dir++;
   }
 
