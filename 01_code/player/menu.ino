@@ -56,7 +56,7 @@ void showVolumeBits() {
 }
 
 // ==================== SELECTION / FLECHES ====================
-void drawRect(int x, int y) {
+void drawCursor(int x, int y) {
   u8g2.setDrawColor(2);
   u8g2.drawBox(x - 2, y - 2, 20, 20);
   u8g2.setDrawColor(1);
@@ -129,16 +129,23 @@ void drawMenu() {
 
 // ==================== INPUT ====================
 void updateSelection() {
+
   unsigned long now = millis();
+  
   if (now - lastPress < DEBOUNCE_MS) return;
+
+  int dir = 0;
+
   if (digitalRead(PREV_PIN) == LOW) {
     lastPress = now;
     Serial.println("press gauche\n");
+    dir--;
     update = true;
   }
   else if (digitalRead(NEXT_PIN) == LOW) {
     lastPress = now;
     Serial.println("press droite\n");
+    dir++;
     update = true;
   }
   else if (digitalRead(PLAY_PIN) == LOW) {
@@ -146,6 +153,7 @@ void updateSelection() {
     Serial.println("press centre\n");
     update = true;
   }
+  selection = (selection + dir + 3)%3;
 }
 
 
@@ -156,22 +164,25 @@ void updateScreen() {
 
   updateSelection();
   
-  if (!update) return;
+  if (!update) {
+    return;
+  }
+
   update = false;
   
-    if (inMenu) {
-      u8g2.clearBuffer();
-      drawMenu();
-      if (selection == 1) {
-        drawRect(14,8);
-      } else if (selection == 2) {
-        drawRect(57,8);
-       } else {
-        drawRect(100,8);
-      }
-      u8g2.sendBuffer();
+  if (inMenu) {
 
-    }
-
+    u8g2.clearBuffer();
+    drawMenu();
   
+    if (selection == 0) {
+          drawCursor(14,8);
+    } else if (selection == 1) {
+          drawCursor(57,8);
+    } else if (selection == 2){
+          drawCursor(100,8);
+    }
+    u8g2.sendBuffer();
+  }
 }
+

@@ -36,8 +36,9 @@ uint8_t volume = 20;
 uint8_t tracks = 0;
 
 bool inMenu =  true;
-bool update = true;
+bool update = false;
 int selection = 2;
+
 
 unsigned long lastPress = 0;
 const unsigned long DEBOUNCE_MS = 300;
@@ -77,14 +78,10 @@ void setup() {
   splashScreen();
   delay(3000);
   showMenu();
-  Serial.flush(); 
 
 }
 
 void loop() {
 
- 
   updateScreen();
-
-
 }
