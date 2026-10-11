@@ -56,11 +56,6 @@ void showVolumeBits() {
 }
 
 // ==================== SELECTION / FLECHES ====================
-void drawCursor(int x, int y) {
-  u8g2.setDrawColor(2);
-  u8g2.drawBox(x - 2, y - 2, 20, 20);
-  u8g2.setDrawColor(1);
-}
 
 void leftArrow(void) {
   static const unsigned char image_ButtonLeft_bits[] U8X8_PROGMEM = {
@@ -94,11 +89,28 @@ void showText(const char* fmt, ...) {
 }
 
 // ==================== MENUS ====================
-void showVolumeMenu() {
-  showText("Volume : %d", volume);
-  leftArrow();
-  rightArrow();
+
+void drawVolumeMenu() {
+    static const unsigned char image_arrow_diagonal_left_down_bits[] U8X8_PROGMEM = {0x10,0x09,0x05,0x03,0x0f};
+    static const unsigned char image_SmallArrowDown_bits[] U8X8_PROGMEM = {0x1f,0x0e,0x04};
+    static const unsigned char image_SmallArrowUp_bits[] U8X8_PROGMEM = {0x04,0x0e,0x1f};
+
+
+    u8g2.setFontMode(1);
+    u8g2.setBitmapMode(1);
+    
+    char buffer[3];
+    sprintf(buffer,"%d",volume);
+    u8g2.setFont(u8g2_font_5x8_tr);
+    u8g2.drawStr(60, 20, buffer);
+    // SmallArrowUp
+    u8g2.drawXBMP(62, 8, 5, 3, image_SmallArrowUp_bits);
+    // SmallArrowDown
+    u8g2.drawXBMP(62, 23, 5, 3, image_SmallArrowDown_bits);
+    // arrow_diagonal_left_down
+    u8g2.drawXBMP(3, 24, 5, 5, image_arrow_diagonal_left_down_bits);
 }
+
 
 void showTrackMenu() {
   showText("Track : %d", tracks);
@@ -127,62 +139,109 @@ void drawMenu() {
   showVolumeBits();
 }
 
-// ==================== INPUT ====================
-void updateSelection() {
+// ==================== MENUS MANAGEMENT ====================
+
+void manageMenu(){
 
   unsigned long now = millis();
-  
+  int dir = 0;
+
   if (now - lastPress < DEBOUNCE_MS) return;
 
-  int dir = 0;
+
+  u8g2.clearBuffer();
+
+  drawMenu();       
+  
+  switch (selection) {
+    case 0:
+      u8g2.setDrawColor(2);
+      u8g2.drawBox(14 - 2, 8 - 2, 20, 20);
+      break;
+    case 1:
+      u8g2.setDrawColor(2);
+      u8g2.drawBox(100 - 2, 8 - 2, 20, 20);
+      break;
+    case 3:
+      u8g2.setDrawColor(2);
+      u8g2.drawBox(57 - 2, 8 - 2, 20, 20);
+
+  }              
 
   if (digitalRead(PREV_PIN) == LOW) {
     lastPress = now;
-    Serial.println("press gauche\n");
+    Serial.println("press gauche"); 
     dir--;
-    update = true;
   }
   else if (digitalRead(NEXT_PIN) == LOW) {
     lastPress = now;
-    Serial.println("press droite\n");
+    Serial.println("press droite");
     dir++;
-    update = true;
   }
-  else if (digitalRead(PLAY_PIN) == LOW) {
+  selection = (selection + dir + 3) % 3;
+
+  if (digitalRead(PLAY_PIN) == LOW) {
     lastPress = now;
-    Serial.println("press centre\n");
-    update = true;
+    Serial.println("press centre");
+    inMenu = false;
   }
-  selection = (selection + dir + 3)%3;
+
+  
+
+  u8g2.sendBuffer();
 }
 
+void manageVolumeMenu(){
 
+  u8g2.clearBuffer();
+  drawVolumeMenu();              
+
+  unsigned long now = millis();
+  int dir = 0;
+
+  if (now - lastPress < DEBOUNCE_MS) return;
+
+  if (digitalRead(PLAY_PIN) == LOW) {
+    lastPress = now;
+    Serial.println("press gauche");
+    u8g2.setDrawColor(2);
+    u8g2.drawBox(60, 7, 9, 5);
+    dir--;
+  }
+  else if (digitalRead(NEXT_PIN) == LOW) {
+    lastPress = now;
+    Serial.println("press droite");
+    u8g2.setDrawColor(2);
+    u8g2.drawBox(60, 22, 9, 5);
+    dir++;
+  }
+
+  volume = (volume + dir + 30) % 30;
+
+  if (digitalRead(PREV_PIN) == LOW) {
+    lastPress = now;
+    Serial.println("retour");
+    u8g2.setDrawColor(2);
+    u8g2.drawBox(2, 23, 7, 7);
+    inMenu = true;
+  }
+  u8g2.sendBuffer();
+}
 
 // ==================== AFFICHAGE ====================
 
 void updateScreen() {
 
-  updateSelection();
-  
-  if (!update) {
+  if (inMenu) {
+    manageMenu();
     return;
   }
 
-  update = false;
-  
-  if (inMenu) {
+  switch (selection){
 
-    u8g2.clearBuffer();
-    drawMenu();
-  
-    if (selection == 0) {
-          drawCursor(14,8);
-    } else if (selection == 1) {
-          drawCursor(57,8);
-    } else if (selection == 2){
-          drawCursor(100,8);
-    }
-    u8g2.sendBuffer();
+    case 0:
+      manageVolumeMenu();
+      break;
+
   }
 }
-

@@ -36,8 +36,8 @@ uint8_t volume = 20;
 uint8_t tracks = 0;
 
 bool inMenu =  true;
-bool update = false;
-int selection = 2;
+int selection = 0;
+bool selected = false;
 
 
 unsigned long lastPress = 0;
