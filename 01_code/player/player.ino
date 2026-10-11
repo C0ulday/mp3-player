@@ -34,10 +34,14 @@ const int NEXT_PIN = 27;
 
 uint8_t volume = 20;
 uint8_t tracks = 0;
+uint8_t folders = 0;
+uint8_t currentFolder = 1;
+uint8_t currentTrack = 1;
 
 bool inMenu =  true;
+bool isPlaying = false;
 int selection = 0;
-bool selected = false;
+
 
 
 unsigned long lastPress = 0;
@@ -72,6 +76,8 @@ void setup() {
 
   if (ok) {
     player.volume(volume);
+    folders = player.readFolderCounts();
+    tracks = readFileCountsInFolder(currentFolder);
   } 
 
   delay(1000);

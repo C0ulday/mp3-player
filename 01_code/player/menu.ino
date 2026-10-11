@@ -75,6 +75,37 @@ void rightArrow(void) {
   u8g2.drawXBMP(114, 13, 4, 7, image_ButtonRight_bits);
 }
 
+
+void drawScreen_1(void) {
+   
+}
+
+void drawTrackMenu(){
+  static const unsigned char image_arrow_diagonal_left_down_bits[] U8X8_PROGMEM = {0x10,0x09,0x05,0x03,0x0f};
+  static const unsigned char image_music_next_bits[] U8X8_PROGMEM = {0x00,0x00,0x07,0xf0,0x09,0x90,0x31,0x90,0x41,0x90,0x81,0x91,0x01,0x92,0x01,0x9c,0x01,0x9c,0x01,0x92,0x81,0x91,0x41,0x90,0x31,0x90,0x09,0x90,0x07,0xf0,0x00,0x00};
+  static const unsigned char image_music_previous_bits[] U8X8_PROGMEM = {0x00,0x00,0x0f,0xe0,0x09,0x90,0x09,0x8c,0x09,0x82,0x89,0x81,0x49,0x80,0x39,0x80,0x39,0x80,0x49,0x80,0x89,0x81,0x09,0x82,0x09,0x8c,0x09,0x90,0x0f,0xe0,0x00,0x00};
+  u8g2.setFontMode(1);
+  u8g2.setBitmapMode(1);
+
+  u8g2.setFont(u8g2_font_profont12_tr);
+
+  char buffer1[5];
+  char buffer2[5];
+  sprintf(buffer1, "000%d", currentTrack);
+  sprintf(buffer2, "000%d", currentFolder);
+  u8g2.drawStr(31, 29, buffer1+buffer2);
+    // arrow_diagonal_left_down
+  u8g2.drawXBMP(3, 24, 5, 5, image_arrow_diagonal_left_down_bits);
+    // ellipse 11
+    u8g2.drawEllipse(64, 11, 5, 5);
+    
+    
+    // music_next
+  u8g2.drawXBMP(80, 4, 16, 16, image_music_next_bits);
+    // music_previous
+  u8g2.drawXBMP(33, 4, 16, 16, image_music_previous_bits);
+
+}
 // ==================== TEXTE (varargs) ====================
 void showText(const char* fmt, ...) {
   char buf[32];
@@ -159,8 +190,6 @@ void manageMenu(){
 
   drawMenu();       
   
-            
-
   if (digitalRead(PREV_PIN) == LOW) {
     lastPress = now;
     Serial.println("press gauche"); 
@@ -238,6 +267,74 @@ void manageVolumeMenu(){
   u8g2.sendBuffer();
 }
 
+void manageTrackMenu(){
+
+  u8g2.clearBuffer();
+
+  drawTrackMenu();
+
+  unsigned long now = millis();
+  int dir = 0;
+
+  if (digitalRead(PLAY_PIN) == LOW && now - lastPress > DEBOUNCE_MS) {
+    lastPress = now;
+    Serial.println("press centre");
+    u8g2.drawFilledEllipse(64, 11, 5, 5); 
+    isPlaying = !isPlaying;
+  }
+
+  else if (digitalRead(NEXT_PIN) == LOW) {
+
+    Serial.println("press droite");
+    u8g2.setDrawColor(2);
+    u8g2.drawBox(79, 4, 18, 16);
+    dir++;
+
+    if ( now - lastPress > DEBOUNCE_MS + 100 ) {
+      currentFolder++;
+    }
+    
+    lastPress = now;
+    
+  }
+
+  else if (digitalRead(PREV_PIN) == LOW) {
+
+    Serial.println("press gauche");
+    u8g2.setDrawColor(2);
+    u8g2.drawBox(32, 4, 18, 16);
+    dir--;
+
+    if ( now - lastPress > DEBOUNCE_MS + 100 ) {
+      currentFolder--;
+    }
+    
+    lastPress = now;
+    
+  }
+
+  currentTrack = (currentTrack + dir + tracks) % tracks + 1;
+
+  if (currentFolder > folders) {
+    currentFolder = 1;
+  }
+  if (currentFolder < 1) {
+    currentFolder = folders;
+  }
+
+  if (isPlaying) {
+    player.playFolder(currentFolder, currentTrack);
+  } else { 
+    player.pause();
+  }
+
+  u8g2.sendBuffer();
+}
+
+void manageBLEMenu(){
+
+}
+
 // ==================== AFFICHAGE ====================
 
 void updateScreen() {
@@ -251,6 +348,12 @@ void updateScreen() {
 
     case 0:
       manageVolumeMenu();
+      break;
+    case 1:
+    manageTrackMenu();
+      break;
+    case 2:
+      manageBLEMenu();
       break;
 
   }
