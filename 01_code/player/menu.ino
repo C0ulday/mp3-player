@@ -103,9 +103,9 @@ void drawVolumeMenu() {
     sprintf(buffer,"%d",volume);
     u8g2.setFont(u8g2_font_6x10_tr);
     if (buffer[2] == '\0') {
-      u8g2.drawStr(58, 20, buffer);
+      u8g2.drawStr(59, 20, buffer);
     } else {
-      u8g2.drawStr(61, 20, buffer);
+      u8g2.drawStr(62, 20, buffer);
       
     }
     
