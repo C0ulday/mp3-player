@@ -36,7 +36,7 @@ Petit lecteur mp3 avec port jack + Bluetooth
 
 ![Alimentation](00_photos/supply_test.png)
 
-Le TP4056 gère la charge de la LiPo en USB. L’interrupteur à bascule coupe la sortie batterie vers l’ESP32 et le DFPlayer. Sur cette image, je m’assure que mon alimentation fonctionne. Il faudrait faire attention sur ce genre de module : il ne reconnaît que du USB-A vers USB-C.
+Le TP4056 gère la charge de la LiPo en USB. L’interrupteur à bascule coupe la sortie batterie vers l’ESP32 et le DFPlayer. Sur cette image, je m’assure que mon alimentation fonctionne. Il faudrait faire attention sur ce genre de module : il ne reconnaît que du USB-A vers USB-C pour la charge de la batterie.
 
 ### Banc de test
 
@@ -105,7 +105,7 @@ Small mp3 player with jack output + Bluetooth
 
 ![Power supply](00_photos/supply_test.png)
 
-The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C.
+The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C, for charging.
 
 
 ### Test bench
