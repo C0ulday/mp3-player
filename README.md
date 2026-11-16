@@ -32,6 +32,25 @@ Petit lecteur mp3 avec port jack + Bluetooth
 | Autres | PCB |
 | Autres | Interrupteur à bascule |
 | Autres | Bouton |
+
+# Software
+
+### Librairies
+DFRobotDFPlayerMini
+Wire
+U8g2lib
+
+- Etape 1 : Faire marcher DFPlayer + haut-parleur
+- Etape 2 : Faire marcher DFPlayer + haut-parleur + boutons
+- Etape 3 : Faire marcher OLED
+
+Sites pratiques : lopaka, pour le design de l'interface et la génération plus rapide de code avec u8g2
+
+- Etape 4 : Faire marcher OLED + boutons
+- Etape 5 : Faire marcher DFPlayer + OLED + haut-parleur + boutons
+
+Le code est disponible dans 01_code
+
 ### Alimentation
 
 ![Alimentation](00_photos/supply_test.png)
@@ -43,24 +62,6 @@ Le TP4056 gère la charge de la LiPo en USB. L’interrupteur à bascule coupe l
 ![Banc de test](00_photos/bench_test.png)
 
 Montage sur breadboard pour valider avant le passage sur PCB/Breadboard universel.
-
-# Software
-
-### Librairies
-DFRobotDFPlayerMini
-Wire
-U8g2lib
-
-### Etape 1 : Faire marcher DFPlayer + haut-parleur
-### Etape 2 : Faire marcher DFPlayer + haut-parleur + boutons
-### Etape 3 : Faire marcher OLED
-
-Sites pratiques : lopaka, pour le design de l'interface et la génération plus rapide de code avec u8g2
-
-### Etape 4 : Faire marcher OLED + boutons
-### Etape 5 : Faire marcher DFPlayer + OLED + haut-parleur + boutons
-
-Le code est disponible dans 01_code
 
 # Produit final
 
@@ -121,14 +122,14 @@ DFRobotDFPlayerMini
 Wire
 U8g2lib
 
-### Step 1 : Get DFPlayer + speaker working
-### Step 2 : Get DFPlayer + speaker + buttons working
-### Step 3 : Get OLED working
+- Step 1 : Get DFPlayer + speaker working
+- Step 2 : Get DFPlayer + speaker + buttons working
+- Step 3 : Get OLED working
 
 Useful sites : lopaka, for interface design and faster u8g2 code generation
 
-### Step 4 : Get OLED + buttons working
-### Step 5 : Get DFPlayer + OLED + speaker + buttons working
+- Step 4 : Get OLED + buttons working
+- Step 5 : Get DFPlayer + OLED + speaker + buttons working
 
 The code is available in 01_code
 
