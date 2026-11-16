@@ -59,8 +59,6 @@ Le code est disponible dans 01_code
 
 ![Alimentation](00_photos/supply_test.png)
 
-Le TP4056 gère la charge de la LiPo en USB. L’interrupteur à bascule coupe la sortie batterie vers l’ESP32 et le DFPlayer. Sur cette image, je m’assure que mon alimentation fonctionne. Il faudrait faire attention sur ce genre de module : il ne reconnaît que du USB-A vers USB-C pour la charge de la batterie.
-
 ### Alimentation
 - Chaîne : Lipo 3.7V, TP4056, interrupteur, MT3608 réglé à 5V
 - Le 5V alimente le DFPlayer et la broche 5V de la carte
@@ -77,6 +75,9 @@ GPIO2, GPIO8 et GPIO9 sont évités : strapping, LED embarquée, bouton BOOT.
 - Pull-ups I2C intégrées au module OLED, non représentées
 - Boutons en INPUT_PULLUP, appui = niveau bas
 - Jack = sortie DAC ligne, HP = sortie ampli interne. Les deux sortent en même temps
+
+
+Le TP4056 gère la charge de la LiPo en USB. L’interrupteur à bascule coupe la sortie batterie vers l’ESP32 et le DFPlayer. Sur cette image, je m’assure que mon alimentation fonctionne. Il faudrait faire attention sur ce genre de module : il ne reconnaît que du USB-A vers USB-C pour la charge de la batterie.
 
 ### Banc de test
 
@@ -147,8 +148,6 @@ The code is available in 01_code
 
 ![Power supply](00_photos/supply_test.png)
 
-The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C, for charging.
-
 - Chain : 3.7V Lipo, TP4056, switch, MT3608 set to 5V
 - The 5V rail feeds the DFPlayer and the board 5V pin
 - The board 3V3 pin is an output of the onboard LDO, it feeds the OLED. Do not drive anything into it
@@ -165,6 +164,9 @@ GPIO2, GPIO8 and GPIO9 are avoided : strapping, onboard LED, BOOT button.
 - I2C pull-ups are on the OLED module, not drawn
 - Buttons use INPUT_PULLUP, pressed = low
 - Jack = DAC line output, speaker = internal amp output. Both play at the same time
+
+The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C, for charging.
+
 
 ### Test bench
 
