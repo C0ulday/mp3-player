@@ -39,13 +39,13 @@ Petit lecteur mp3 avec port jack + Bluetooth
 
 ### Alimentation
 
-![Alimentation](00_photos/supply_test.PNG)
+![Alimentation](00_photos/supply_test.png)
 
 Le TP4056 gère la charge de la Lipo en USB. L'interrupteur à bascule coupe la sortie batterie vers l'ESP32 et le DFPlayer.
 
 ### Banc de test
 
-![Banc de test](00_photos/bench_test.PNG)
+![Banc de test](00_photos/bench_test.png)
 
 Montage sur breadboard pour valider avant le passage sur PCB/Breadboard universel.
 
