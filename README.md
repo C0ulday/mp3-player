@@ -1,4 +1,4 @@
-## Lecteur MP3 avec ESP32 / MP3 player with ESP32
+## Lecteur MP3 avec ESP32 C3 Super Mini / MP3 player with ESP32 C3 Super Mini
 
 english below
 
@@ -21,7 +21,7 @@ Petit lecteur mp3 avec port jack + Bluetooth
 
 | Catégorie | Composant |
 |---|---|
-| Affichage | ESP32 |
+| Affichage | ESP32 C3 Super Mini |
 | Affichage | Écran OLED 0.91″ |
 | Alimentation | Batterie LiPo 3.7 V |
 | Alimentation | TP4056 |
@@ -90,7 +90,7 @@ Small mp3 player with jack output + Bluetooth
 
 | Category | Component |
 |---|---|
-| Display | ESP32 |
+| Display | ESP32 C3 Super Mini |
 | Display | OLED screen 0.91″ |
 | Power supply | LiPo battery 3.7 V |
 | Power supply | TP4056 |
