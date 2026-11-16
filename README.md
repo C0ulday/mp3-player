@@ -112,13 +112,13 @@ Small mp3 player with jack output + Bluetooth
 
 ### Power supply
 
-![Power supply](00_photos/supply_test.PNG)
+![Power supply](00_photos/supply_test.png)
 
 The TP4056 handles Lipo charging over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer.
 
 ### Test bench
 
-![Test bench](00_photos/bench_test.PNG)
+![Test bench](00_photos/bench_test.png)
 
 Breadboard setup used to validate each block before moving to the PCB.
 
