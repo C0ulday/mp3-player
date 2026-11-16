@@ -102,19 +102,6 @@ Small mp3 player with jack output + Bluetooth
 | Others | Toggle switch |
 | Others | Button |
 
-### Power supply
-
-![Power supply](00_photos/supply_test.png)
-
-The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C, for charging.
-
-
-### Test bench
-
-![Test bench](00_photos/bench_test.png)
-
-Breadboard setup used to validate each block before moving to the PCB.
-
 # Software
 
 ### Libraries
@@ -132,6 +119,20 @@ Useful sites : lopaka, for interface design and faster u8g2 code generation
 - Step 5 : Get DFPlayer + OLED + speaker + buttons working
 
 The code is available in 01_code
+
+
+### Power supply
+
+![Power supply](00_photos/supply_test.png)
+
+The TP4056 handles charging the LiPo over USB. The toggle switch cuts the battery output to the ESP32 and the DFPlayer. In this image, I’m checking that my power supply works. You should be careful with this kind of module: it only recognizes USB-A to USB-C, for charging.
+
+
+### Test bench
+
+![Test bench](00_photos/bench_test.png)
+
+Breadboard setup used to validate each block before moving to the PCB.
 
 # Final product
 
