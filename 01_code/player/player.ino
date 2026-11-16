@@ -77,7 +77,7 @@ void setup() {
   if (ok) {
     player.volume(volume);
     folders = player.readFolderCounts();
-    tracks = readFileCountsInFolder(currentFolder);
+    //tracks = readFileCountsInFolder(currentFolder);
   } 
 
   delay(1000);

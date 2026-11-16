@@ -89,11 +89,6 @@ void drawTrackMenu(){
 
   u8g2.setFont(u8g2_font_profont12_tr);
 
-  char buffer1[5];
-  char buffer2[5];
-  sprintf(buffer1, "000%d", currentTrack);
-  sprintf(buffer2, "000%d", currentFolder);
-  u8g2.drawStr(31, 29, buffer1+buffer2);
     // arrow_diagonal_left_down
   u8g2.drawXBMP(3, 24, 5, 5, image_arrow_diagonal_left_down_bits);
     // ellipse 11
@@ -292,9 +287,9 @@ void manageTrackMenu(){
 
     if ( now - lastPress > DEBOUNCE_MS + 100 ) {
       currentFolder++;
-    }
-    
+
     lastPress = now;
+    }
     
   }
 
@@ -332,7 +327,7 @@ void manageTrackMenu(){
 }
 
 void manageBLEMenu(){
-
+  return;
 }
 
 // ==================== AFFICHAGE ====================
