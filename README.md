@@ -51,6 +51,8 @@ Sites pratiques : lopaka, pour le design de l'interface et la génération plus 
 
 Le code est disponible dans 01_code
 
+![Schema](00_photos/electronics.png)
+
 ### Alimentation
 
 ![Alimentation](00_photos/supply_test.png)
@@ -120,6 +122,7 @@ Useful sites : lopaka, for interface design and faster u8g2 code generation
 
 The code is available in 01_code
 
+![Scheme](00_photos/electronics.png)
 
 ### Power supply
 
