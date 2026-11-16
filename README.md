@@ -1,4 +1,4 @@
-## Lecteur MP3 avec ESP32
+## Lecteur MP3 avec ESP32 / MP3 player with ESP32
 
 english below
 
