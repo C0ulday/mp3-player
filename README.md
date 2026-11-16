@@ -19,24 +19,19 @@ Petit lecteur mp3 avec port jack + Bluetooth
 
 # Matériel
 
-### Affichage
-- ESP32
-- Ecran OLED 0.91''
-
-### Alimentation
-- Lipo Batterie 3.7V
-- TP4056
-
-### Son
-- DFPlayer + haut-parleur 2Ohms
-- Carte SD
-
-### Autres
-- connecteur Jack
-- PCB
-- Interrupteur à Bascule
-- Bouton
-
+| Catégorie | Composant |
+|---|---|
+| Affichage | ESP32 |
+| Affichage | Écran OLED 0.91″ |
+| Alimentation | Batterie LiPo 3.7 V |
+| Alimentation | TP4056 |
+| Alimentation | MT3608 |
+| Son | DFPlayer + haut-parleur 2 Ω |
+| Son | Carte SD |
+| Autres | Connecteur Jack |
+| Autres | PCB |
+| Autres | Interrupteur à bascule |
+| Autres | Bouton |
 ### Alimentation
 
 ![Alimentation](00_photos/supply_test.png)
@@ -92,23 +87,19 @@ Small mp3 player with jack output + Bluetooth
 
 # Hardware
 
-### Display
-- ESP32
-- OLED screen 0.91''
-
-### Power supply
-- Lipo battery 3.7V
-- TP4056
-
-### Audio
-- DFPlayer + 2Ohms speaker
-- SD card
-
-### Others
-- Jack connector
-- PCB
-- Toggle switch
-- Button
+| Category | Component |
+|---|---|
+| Display | ESP32 |
+| Display | OLED screen 0.91″ |
+| Power supply | LiPo battery 3.7 V |
+| Power supply | TP4056 |
+| Power supply | MT3608 |
+| Audio | DFPlayer + 2 Ω speaker |
+| Audio | SD card |
+| Others | Jack connector |
+| Others | PCB |
+| Others | Toggle switch |
+| Others | Button |
 
 ### Power supply
 
